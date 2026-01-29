@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Journey Through Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Decorative elements -->
+        <div class="floating-hearts">
+            <span class="heart" style="--delay: 0s; --left: 10%;">♥</span>
+            <span class="heart" style="--delay: 2s; --left: 25%;">♥</span>
+            <span class="heart" style="--delay: 4s; --left: 75%;">♥</span>
+            <span class="heart" style="--delay: 1s; --left: 90%;">♥</span>
+            <span class="heart" style="--delay: 3s; --left: 50%;">♥</span>
+        </div>
+
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <div class="screen-content">
+                <div class="logo-container">
+                    <div class="logo-heart">♥</div>
+                </div>
+                <h1 class="main-title">A Journey Through Us</h1>
+                <p class="subtitle">A treasure hunt through our memories</p>
+                <div class="welcome-decoration">✦ ✦ ✦</div>
+                <p class="intro-text">
+                    Hello my dearest Weewee,<br><br>
+                    Today, we walk through the places that made us "us".<br>
+                    Each stop holds a piece of our story.<br><br>
+                    Are you ready to begin?
+                </p>
+                <button id="start-btn" class="primary-btn">
+                    <span>Begin Our Journey</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Hunt Screen -->
+        <div id="hunt-screen" class="screen">
+            <div class="screen-content">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <p class="progress-text"><span id="current-location">1</span> of <span id="total-locations">6</span></p>
+                </div>
+
+                <div id="location-card" class="location-card">
+                    <div class="card-header">
+                        <span id="location-number-trigger" class="location-number">Location <span id="loc-num">1</span></span>
+                    </div>
+                    <div class="card-body">
+                        <h2 id="clue-text" class="clue-text"></h2>
+                        <div id="distance-container" class="distance-container">
+                            <div class="distance-icon">📍</div>
+                            <p id="distance-text" class="distance-text">Calculating...</p>
+                        </div>
+                        
+                        <!-- Skip Code Input -->
+                        <div id="skip-code-container" class="skip-code-container visible">
+                            <p class="skip-code-label">Have a code? Enter it here:</p>
+                            <div class="skip-code-wrapper">
+                                <input type="text" id="skip-code-input" class="skip-code-input" placeholder="Enter code..." maxlength="12" autocomplete="off" autocapitalize="characters" onkeypress="if(event.key==='Enter'){validateSkipCode();}">
+                                <button type="button" id="skip-code-btn" class="skip-code-btn" onclick="validateSkipCode()">✓</button>
+                            </div>
+                            <p id="skip-code-error" class="skip-code-error"></p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button id="arrived-btn" class="primary-btn" disabled>
+                            <span>I'm Here!</span>
+                            <span class="btn-icon">♥</span>
+                        </button>
+                        <p id="gps-status" class="gps-status"></p>
+                    </div>
+                </div>
+
+                <button id="nav-btn" class="secondary-btn">
+                    <span class="nav-icon">🧭</span>
+                    <span>Open in Maps</span>
+                </button>
+
+                <button id="refresh-btn" class="secondary-btn refresh-btn">
+                    <span class="refresh-icon">🔄</span>
+                    <span>Refresh GPS</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Success Screen (when arrived at location) -->
+        <div id="success-screen" class="screen">
+            <div class="screen-content">
+                <div class="success-icon">✨</div>
+                <h2 class="success-title">You found it!</h2>
+                <p id="location-name" class="location-name"></p>
+                <div class="memory-text">
+                    <p id="memory-description"></p>
+                </div>
+                <div class="envelope-container">
+                    <div class="envelope">
+                        <span class="envelope-icon">💌</span>
+                    </div>
+                    <p class="envelope-text">Open Envelope #<span id="envelope-num">1</span></p>
+                </div>
+                <button id="next-btn" class="primary-btn">
+                    <span>Continue to Next Clue</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Final Screen -->
+        <div id="final-screen" class="screen">
+            <div class="screen-content final-content">
+                <div class="final-hearts">
+                    <span>♥</span><span>♥</span><span>♥</span>
+                </div>
+                <h1 class="final-title">The End of the Hunt</h1>
+                <h2 class="final-subtitle">But Not Our Story</h2>
+                <div class="final-decoration">✦</div>
+                <p class="final-text">
+                    From frozen snowmen to starlit skies,<br>
+                    From first dates to this moment—<br>
+                    Every step led here, to you.<br><br>
+                    Open your final envelope, my love.
+                </p>
+                <div class="final-envelope">
+                    <span class="final-envelope-icon">💌</span>
+                    <p>Envelope #6</p>
+                </div>
+                <div class="sunset-indicator">
+                    <span class="sunset-icon">🌅</span>
+                    <p>Watch the sunset together</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
